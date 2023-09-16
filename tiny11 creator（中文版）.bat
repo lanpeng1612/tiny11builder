@@ -2,152 +2,152 @@
 setlocal EnableExtensions EnableDelayedExpansion
 
 title tiny11 builder alpha
-echo »¶Ó­Ê¹ÓÃtiny11Í¼Ïñ´´½¨Õß£¡¡¾ÍøÂç²ËÄñÓŞãå¡¿ĞŞ¸Ä°æ
+echo æ¬¢è¿ä½¿ç”¨tiny11å›¾åƒåˆ›å»ºè€…ï¼ã€ç½‘ç»œèœé¸Ÿæ„šæ²ã€‘ä¿®æ”¹ç‰ˆ
 timeout /t 3 /nobreak > nul
 cls
 
 set DriveLetter=
-echo Ö»ĞèÒªÇı¶¯ºÅ×ÖÄ¸¼´¿ÉÈç£ºe 
-set /p DriveLetter=ÇëÊäÈëWindows 11Ó³ÏñµÄÇı¶¯Æ÷ºÅ: 
+echo åªéœ€è¦é©±åŠ¨å·å­—æ¯å³å¯å¦‚ï¼še 
+set /p DriveLetter=è¯·è¾“å…¥Windows 11æ˜ åƒçš„é©±åŠ¨å™¨å·: 
 set "DriveLetter=%DriveLetter%:"
 echo.
 if not exist "%DriveLetter%\sources\boot.wim" (
-	echo.ÔÚÖ¸¶¨µÄÇı¶¯Æ÷ºÅÖĞÕÒ²»µ½Windows²Ù×÷ÏµÍ³°²×°ÎÄ¼ş..
+	echo.åœ¨æŒ‡å®šçš„é©±åŠ¨å™¨å·ä¸­æ‰¾ä¸åˆ°Windowsæ“ä½œç³»ç»Ÿå®‰è£…æ–‡ä»¶..
 	echo.
-	echo.ÇëÊäÈëÕıÈ·µÄDVDÇı¶¯Æ÷ºÅ..
+	echo.è¯·è¾“å…¥æ­£ç¡®çš„DVDé©±åŠ¨å™¨å·..
 	goto :Stop
 )
 
 if not exist "%DriveLetter%\sources\install.wim" (
-	echo.ÔÚÖ¸¶¨µÄÇı¶¯Æ÷ºÅÖĞÕÒ²»µ½Windows²Ù×÷ÏµÍ³°²×°ÎÄ¼ş..
+	echo.åœ¨æŒ‡å®šçš„é©±åŠ¨å™¨å·ä¸­æ‰¾ä¸åˆ°Windowsæ“ä½œç³»ç»Ÿå®‰è£…æ–‡ä»¶..
 	echo.
-	echo.ÇëÊäÈëÕıÈ·µÄDVDÇı¶¯Æ÷ºÅ..
+	echo.è¯·è¾“å…¥æ­£ç¡®çš„DVDé©±åŠ¨å™¨å·..
 	goto :Stop
 )
 md c:\tiny11
-echo ÕıÔÚ¸´ÖÆWindowsÓ³Ïñ...
+echo æ­£åœ¨å¤åˆ¶Windowsæ˜ åƒ...
 xcopy.exe /E /I /H /R /Y /J %DriveLetter% c:\tiny11 >nul
-echo ¸´ÖÆÍê³É!
+echo å¤åˆ¶å®Œæˆ!
 sleep 2
 cls
-echo »ñÈ¡Í¼ÏñĞÅÏ¢:
+echo è·å–å›¾åƒä¿¡æ¯:
 dism /Get-WimInfo /wimfile:c:\tiny11\sources\install.wim
 set index=
-set /p index=ÇëÊäÈëÍ¼ÏñË÷Òı¡°µÚÒ»ÌõĞÅÏ¢¡±:
+set /p index=è¯·è¾“å…¥å›¾åƒç´¢å¼•â€œç¬¬ä¸€æ¡ä¿¡æ¯â€:
 
 echo=
-echo ÊÇ·ñ±£ÁôEdgeä¯ÀÀÆ÷ºÍonedrive
-set /p yes_no=ÊäÈë y ±£Áô£º
+echo æ˜¯å¦ä¿ç•™Edgeæµè§ˆå™¨å’Œonedrive
+set /p yes_no=è¾“å…¥ y ä¿ç•™ï¼š
 
 set "index=%index%"
-echo ÕıÔÚ×°ÔØWindowsÓ³Ïñ¡£Õâ¿ÉÄÜĞèÒªÒ»¶ÎÊ±¼ä.
+echo æ­£åœ¨è£…è½½Windowsæ˜ åƒã€‚è¿™å¯èƒ½éœ€è¦ä¸€æ®µæ—¶é—´.
 echo.
 md c:\scratchdir
 dism /mount-image /imagefile:c:\tiny11\sources\install.wim /index:%index% /mountdir:c:\scratchdir
 
-echo °²×°Íê³É£¡ÕıÔÚÖ´ĞĞÓ¦ÓÃ³ÌĞòµÄÉ¾³ı...
-echo ÕıÔÚÉ¾³ı Clipchamp...
+echo å®‰è£…å®Œæˆï¼æ­£åœ¨æ‰§è¡Œåº”ç”¨ç¨‹åºçš„åˆ é™¤...
+echo æ­£åœ¨åˆ é™¤ Clipchamp...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Clipchamp.Clipchamp_2.2.8.0_neutral_~_yxz26nhyzhsrt 
-echo ÕıÔÚÉ¾³ı News...
+echo æ­£åœ¨åˆ é™¤ News...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.BingNews_2022.507.446.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Weather...
+echo æ­£åœ¨åˆ é™¤ Weather...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.BingWeather_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Xbox...
+echo æ­£åœ¨åˆ é™¤ Xbox...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.GamingApp_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı GetHelp...
+echo æ­£åœ¨åˆ é™¤ GetHelp...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.GetHelp_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı GetStarted...
+echo æ­£åœ¨åˆ é™¤ GetStarted...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.Getstarted_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Office Hub...
+echo æ­£åœ¨åˆ é™¤ Office Hub...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.MicrosoftOfficeHub_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Solitaire...
+echo æ­£åœ¨åˆ é™¤ Solitaire...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.MicrosoftSolitaireCollection_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı PeopleApp...
+echo æ­£åœ¨åˆ é™¤ PeopleApp...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.People_2022.507.446.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı PowerAutomate...
+echo æ­£åœ¨åˆ é™¤ PowerAutomate...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.PowerAutomateDesktop_2022.507.446.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı ToDo...
+echo æ­£åœ¨åˆ é™¤ ToDo...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.Todos_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Alarms...
+echo æ­£åœ¨åˆ é™¤ Alarms...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.WindowsAlarms_2022.507.446.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Mail...
+echo æ­£åœ¨åˆ é™¤ Mail...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:microsoft.windowscommunicationsapps_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Feedback Hub...
+echo æ­£åœ¨åˆ é™¤ Feedback Hub...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.WindowsFeedbackHub_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Maps...
+echo æ­£åœ¨åˆ é™¤ Maps...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.WindowsMaps_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Sound Recorder...
+echo æ­£åœ¨åˆ é™¤ Sound Recorder...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.WindowsSoundRecorder_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı XboxTCUI...
+echo æ­£åœ¨åˆ é™¤ XboxTCUI...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.Xbox.TCUI_2022.507.446.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı XboxGamingOverlay...
+echo æ­£åœ¨åˆ é™¤ XboxGamingOverlay...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.XboxGamingOverlay_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı XboxGameOverlay...
+echo æ­£åœ¨åˆ é™¤ XboxGameOverlay...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.XboxGameOverlay_2022.507.446.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı XboxSpeechToTextOverlay...
+echo æ­£åœ¨åˆ é™¤ XboxSpeechToTextOverlay...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.XboxSpeechToTextOverlay_2022.507.446.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Your Phone...
+echo æ­£åœ¨åˆ é™¤ Your Phone...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.YourPhone_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Music...
+echo æ­£åœ¨åˆ é™¤ Music...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.ZuneMusic_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Video...
+echo æ­£åœ¨åˆ é™¤ Video...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.ZuneVideo_2022.507.446.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Family...
+echo æ­£åœ¨åˆ é™¤ Family...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:MicrosoftCorporationII.MicrosoftFamily_2022.507.447.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı QuickAssist...
+echo æ­£åœ¨åˆ é™¤ QuickAssist...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:MicrosoftCorporationII.QuickAssist_2022.507.446.0_neutral_~_8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Teams...
+echo æ­£åœ¨åˆ é™¤ Teams...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:MicrosoftTeams_23002.403.1788.1930_x64__8wekyb3d8bbwe
-echo ÕıÔÚÉ¾³ı Cortana...
+echo æ­£åœ¨åˆ é™¤ Cortana...
 dism /image:c:\scratchdir /Remove-ProvisionedAppxPackage /PackageName:Microsoft.549981C3F5F10_4.2204.13303.0_neutral_~_8wekyb3d8bbwe
 
-echo ÕıÔÚÉ¾³ı of system apps complete! Now proceeding to removal of system packages...
+echo æ­£åœ¨åˆ é™¤ of system apps complete! Now proceeding to removal of system packages...
 timeout /t 1 /nobreak > nul
 cls
-echo ÕıÔÚÉ¾³ı Internet Explorer...
+echo æ­£åœ¨åˆ é™¤ Internet Explorer...
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-InternetExplorer-Optional-Package~31bf3856ad364e35~amd64~en-US~11.0.22621.1 > nul
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-InternetExplorer-Optional-Package~31bf3856ad364e35~amd64~~11.0.22621.1265 > nul
-echo ÕıÔÚÉ¾³ı LA57:
+echo æ­£åœ¨åˆ é™¤ LA57:
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-Kernel-LA57-FoD-Package~31bf3856ad364e35~amd64~~10.0.22621.1265 > nul
-echo ÕıÔÚÉ¾³ı Handwriting:
+echo æ­£åœ¨åˆ é™¤ Handwriting:
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-LanguageFeatures-Handwriting-en-us-Package~31bf3856ad364e35~amd64~~10.0.22621.1265 > nul
-echo ÕıÔÚÉ¾³ı OCR:
+echo æ­£åœ¨åˆ é™¤ OCR:
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-LanguageFeatures-OCR-en-us-Package~31bf3856ad364e35~amd64~~10.0.22621.1265 > nul
-echo ÕıÔÚÉ¾³ı Speech:
+echo æ­£åœ¨åˆ é™¤ Speech:
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-LanguageFeatures-Speech-en-us-Package~31bf3856ad364e35~amd64~~10.0.22621.1265 > nul
-echo ÕıÔÚÉ¾³ı TTS:
+echo æ­£åœ¨åˆ é™¤ TTS:
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-LanguageFeatures-TextToSpeech-en-us-Package~31bf3856ad364e35~amd64~~10.0.22621.1265 > nul
-echo ÕıÔÚÉ¾³ı Media Player Legacy:
+echo æ­£åœ¨åˆ é™¤ Media Player Legacy:
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-MediaPlayer-Package~31bf3856ad364e35~amd64~~10.0.22621.1265 > nul
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-MediaPlayer-Package~31bf3856ad364e35~wow64~en-US~10.0.22621.1 > nul
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-MediaPlayer-Package~31bf3856ad364e35~amd64~~10.0.22621.1265 > nul
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-MediaPlayer-Package~31bf3856ad364e35~wow64~~10.0.22621.1 > nul
-echo ÕıÔÚÉ¾³ı Tablet PC Math:
+echo æ­£åœ¨åˆ é™¤ Tablet PC Math:
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-TabletPCMath-Package~31bf3856ad364e35~amd64~~10.0.22621.1265 > nul
-echo ÕıÔÚÉ¾³ı Wallpapers:
+echo æ­£åœ¨åˆ é™¤ Wallpapers:
 dism /image:c:\scratchdir /Remove-Package /PackageName:Microsoft-Windows-Wallpaper-Content-Extended-FoD-Package~31bf3856ad364e35~amd64~~10.0.22621.1265 > nul
 
-rem Ñ¡ÔñÊÇ·ñ±£ÁôEdgeä¯ÀÀÆ÷ºÍonedrive
+rem é€‰æ‹©æ˜¯å¦ä¿ç•™Edgeæµè§ˆå™¨å’Œonedrive
 
 if not "%yes_no%" == "y" (
-echo ÕıÔÚÉ¾³ı Edge:
+echo æ­£åœ¨åˆ é™¤ Edge:
 rd "C:\scratchdir\Program Files (x86)\Microsoft\Edge" /s /q
 rd "C:\scratchdir\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
-echo ÕıÔÚÉ¾³ı OneDrive:
+echo æ­£åœ¨åˆ é™¤ OneDrive:
 takeown /f C:\scratchdir\Windows\System32\OneDriveSetup.exe
 icacls C:\scratchdir\Windows\System32\OneDriveSetup.exe /grant Administrators:F /T /C
 del /f /q /s "C:\scratchdir\Windows\System32\OneDriveSetup.exe"
 )
-echo É¾³ıÍê³É!
+echo åˆ é™¤å®Œæˆ!
 timeout /t 2 /nobreak > nul
 cls
-echo ÕıÔÚ¼ÓÔØ×¢²á±í...
+echo æ­£åœ¨åŠ è½½æ³¨å†Œè¡¨...
 reg load HKLM\zCOMPONENTS "c:\scratchdir\Windows\System32\config\COMPONENTS" >nul
 reg load HKLM\zDEFAULT "c:\scratchdir\Windows\System32\config\default" >nul
 reg load HKLM\zNTUSER "c:\scratchdir\Users\Default\ntuser.dat" >nul
 reg load HKLM\zSOFTWARE "c:\scratchdir\Windows\System32\config\SOFTWARE" >nul
 reg load HKLM\zSYSTEM "c:\scratchdir\Windows\System32\config\SYSTEM" >nul
-echo ÈÆ¹ıÏµÍ³ÒªÇó£¨ÔÚÏµÍ³Ó³ÏñÉÏ£©:
+echo ç»•è¿‡ç³»ç»Ÿè¦æ±‚ï¼ˆåœ¨ç³»ç»Ÿæ˜ åƒä¸Šï¼‰:
 			Reg add "HKLM\zDEFAULT\Control Panel\UnsupportedHardwareNotificationCache" /v "SV1" /t REG_DWORD /d "0" /f >nul 2>&1
 			Reg add "HKLM\zDEFAULT\Control Panel\UnsupportedHardwareNotificationCache" /v "SV2" /t REG_DWORD /d "0" /f >nul 2>&1
 			Reg add "HKLM\zNTUSER\Control Panel\UnsupportedHardwareNotificationCache" /v "SV1" /t REG_DWORD /d "0" /f >nul 2>&1
@@ -158,24 +158,24 @@ echo ÈÆ¹ıÏµÍ³ÒªÇó£¨ÔÚÏµÍ³Ó³ÏñÉÏ£©:
 			Reg add "HKLM\zSYSTEM\Setup\LabConfig" /v "BypassStorageCheck" /t REG_DWORD /d "1" /f >nul 2>&1
 			Reg add "HKLM\zSYSTEM\Setup\LabConfig" /v "BypassTPMCheck" /t REG_DWORD /d "1" /f >nul 2>&1
 			Reg add "HKLM\zSYSTEM\Setup\MoSetup" /v "AllowUpgradesWithUnsupportedTPMOrCPU" /t REG_DWORD /d "1" /f >nul 2>&1
-echo ½ûÓÃ Teams:
+echo ç¦ç”¨ Teams:
 Reg add "HKLM\zSOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v "ConfigureChatAutoInstall" /t REG_DWORD /d "0" /f >nul 2>&1
-echo ½ûÓÃÔŞÖúÓ¦ÓÃ³ÌĞò:
+echo ç¦ç”¨èµåŠ©åº”ç”¨ç¨‹åº:
 Reg add "HKLM\zNTUSER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
 			Reg add "HKLM\zNTUSER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
 			Reg add "HKLM\zNTUSER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
 			Reg add "HKLM\zSOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d "1" /f >nul 2>&1
 			Reg add "HKLM\zSOFTWARE\Microsoft\PolicyManager\current\device\Start" /v "ConfigureStartPins" /t REG_SZ /d "{\"pinnedList\": [{}]}" /f >nul 2>&1
-echo ÔÚOOBEÉÏÆôÓÃ±¾µØÕÊ»§:
+echo åœ¨OOBEä¸Šå¯ç”¨æœ¬åœ°å¸æˆ·:
 Reg add "HKLM\zSOFTWARE\Microsoft\Windows\CurrentVersion\OOBE" /v "BypassNRO" /t REG_DWORD /d "1" /f >nul 2>&1
 copy /y %~dp0autounattend.xml c:\scratchdir\Windows\System32\Sysprep\autounattend.xml
-echo ½ûÓÃ ÄÚ²¿·şÎñÆ÷´íÎó:
+echo ç¦ç”¨ å†…éƒ¨æœåŠ¡å™¨é”™è¯¯:
 Reg add "HKLM\zSOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager" /v "ShippedWithReserves" /t REG_DWORD /d "0" /f >nul 2>&1
-echo ½ûÓÃ Chat icon£¨ÁÄÌìÍ¼±ê£©:
+echo ç¦ç”¨ Chat iconï¼ˆèŠå¤©å›¾æ ‡ï¼‰:
 Reg add "HKLM\zSOFTWARE\Policies\Microsoft\Windows\Windows Chat" /v "ChatIcon" /t REG_DWORD /d "3" /f >nul 2>&1
 Reg add "HKLM\zNTUSER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarMn" /t REG_DWORD /d "0" /f >nul 2>&1
-echo µ÷ÕûÍê³É!
-echo ÕıÔÚĞ¶ÔØ×¢²á±í...
+echo è°ƒæ•´å®Œæˆ!
+echo æ­£åœ¨å¸è½½æ³¨å†Œè¡¨...
 reg unload HKLM\zCOMPONENTS >nul 2>&1
 reg unload HKLM\zDRIVERS >nul 2>&1
 reg unload HKLM\zDEFAULT >nul 2>&1
@@ -183,27 +183,27 @@ reg unload HKLM\zNTUSER >nul 2>&1
 reg unload HKLM\zSCHEMA >nul 2>&1
 reg unload HKLM\zSOFTWARE >nul 2>&1
 reg unload HKLM\zSYSTEM >nul 2>&1
-echo ÕıÔÚÇåÀíÍ¼Ïñ...
+echo æ­£åœ¨æ¸…ç†å›¾åƒ...
 dism /image:c:\scratchdir /Cleanup-Image /StartComponentCleanup /ResetBase
-echo ÇåÀíÍê³É.
-echo ÕıÔÚĞ¶ÔØÓ³Ïñ...
+echo æ¸…ç†å®Œæˆ.
+echo æ­£åœ¨å¸è½½æ˜ åƒ...
 dism /unmount-image /mountdir:c:\scratchdir /commit
-echo ÕıÔÚµ¼³öÍ¼Ïñ...
+echo æ­£åœ¨å¯¼å‡ºå›¾åƒ...
 Dism /Export-Image /SourceImageFile:c:\tiny11\sources\install.wim /SourceIndex:%index% /DestinationImageFile:c:\tiny11\sources\install2.wim /compress:max
 del c:\tiny11\sources\install.wim
 ren c:\tiny11\sources\install2.wim install.wim
-echo WindowsÓ³ÏñÒÑÍê³É¡£¼ÌĞø boot.wim.
+echo Windowsæ˜ åƒå·²å®Œæˆã€‚ç»§ç»­ boot.wim.
 timeout /t 2 /nobreak > nul
 cls
-echo ÕıÔÚ×°ÔØÆô¶¯Ó³Ïñ:
+echo æ­£åœ¨è£…è½½å¯åŠ¨æ˜ åƒ:
 dism /mount-image /imagefile:c:\tiny11\sources\boot.wim /index:2 /mountdir:c:\scratchdir
-echo ÕıÔÚ¼ÓÔØ×¢²á±í...
+echo æ­£åœ¨åŠ è½½æ³¨å†Œè¡¨...
 reg load HKLM\zCOMPONENTS "c:\scratchdir\Windows\System32\config\COMPONENTS" >nul
 reg load HKLM\zDEFAULT "c:\scratchdir\Windows\System32\config\default" >nul
 reg load HKLM\zNTUSER "c:\scratchdir\Users\Default\ntuser.dat" >nul
 reg load HKLM\zSOFTWARE "c:\scratchdir\Windows\System32\config\SOFTWARE" >nul
 reg load HKLM\zSYSTEM "c:\scratchdir\Windows\System32\config\SYSTEM" >nul
-echo ÈÆ¹ıÏµÍ³ÒªÇó£¨ÔÚÉèÖÃÍ¼ÏñÉÏ£©:
+echo ç»•è¿‡ç³»ç»Ÿè¦æ±‚ï¼ˆåœ¨è®¾ç½®å›¾åƒä¸Šï¼‰:
 			Reg add "HKLM\zDEFAULT\Control Panel\UnsupportedHardwareNotificationCache" /v "SV1" /t REG_DWORD /d "0" /f >nul 2>&1
 			Reg add "HKLM\zDEFAULT\Control Panel\UnsupportedHardwareNotificationCache" /v "SV2" /t REG_DWORD /d "0" /f >nul 2>&1
 			Reg add "HKLM\zNTUSER\Control Panel\UnsupportedHardwareNotificationCache" /v "SV1" /t REG_DWORD /d "0" /f >nul 2>&1
@@ -214,8 +214,8 @@ echo ÈÆ¹ıÏµÍ³ÒªÇó£¨ÔÚÉèÖÃÍ¼ÏñÉÏ£©:
 			Reg add "HKLM\zSYSTEM\Setup\LabConfig" /v "BypassStorageCheck" /t REG_DWORD /d "1" /f >nul 2>&1
 			Reg add "HKLM\zSYSTEM\Setup\LabConfig" /v "BypassTPMCheck" /t REG_DWORD /d "1" /f >nul 2>&1
 			Reg add "HKLM\zSYSTEM\Setup\MoSetup" /v "AllowUpgradesWithUnsupportedTPMOrCPU" /t REG_DWORD /d "1" /f >nul 2>&1
-echo µ÷ÕûÍê³É! 
-echo ÕıÔÚĞ¶ÔØ×¢²á±í...
+echo è°ƒæ•´å®Œæˆ! 
+echo æ­£åœ¨å¸è½½æ³¨å†Œè¡¨...
 reg unload HKLM\zCOMPONENTS >nul 2>&1
 reg unload HKLM\zDRIVERS >nul 2>&1
 reg unload HKLM\zDEFAULT >nul 2>&1
@@ -223,18 +223,18 @@ reg unload HKLM\zNTUSER >nul 2>&1
 reg unload HKLM\zSCHEMA >nul 2>&1
 reg unload HKLM\zSOFTWARE >nul 2>&1
 reg unload HKLM\zSYSTEM >nul 2>&1
-echo ÕıÔÚĞ¶ÔØÓ³Ïñ...
+echo æ­£åœ¨å¸è½½æ˜ åƒ...
 dism /unmount-image /mountdir:c:\scratchdir /commit 
 cls
-echo tiny11Í¼ÏñÏÖÔÚÍê³É¡£¼ÌĞøÖÆ¶¨ISO...
-echo ÕıÔÚ¸´ÖÆÎŞÈË²ÎÓëÎÄ¼şÒÔÈÆ¹ıOOBEÉÏµÄMSÕÊ»§...
+echo tiny11å›¾åƒç°åœ¨å®Œæˆã€‚ç»§ç»­åˆ¶å®šISO...
+echo æ­£åœ¨å¤åˆ¶æ— äººå‚ä¸æ–‡ä»¶ä»¥ç»•è¿‡OOBEä¸Šçš„MSå¸æˆ·...
 copy /y %~dp0autounattend.xml c:\tiny11\autounattend.xml
 echo.
-echo ´´½¨ISOÍ¼Ïñ...
+echo åˆ›å»ºISOå›¾åƒ...
 %~dp0oscdimg.exe -m -o -u2 -udfver102 -bootdata:2#p0,e,bc:\tiny11\boot\etfsboot.com#pEF,e,bc:\tiny11\efi\microsoft\boot\efisys.bin c:\tiny11 %~dp0tiny11.iso
-echo ´´½¨Íê³É£¡°´ÈÎÒâ¼üÍË³ö½Å±¾...
+echo åˆ›å»ºå®Œæˆï¼æŒ‰ä»»æ„é”®é€€å‡ºè„šæœ¬...
 pause 
-echo Ö´ĞĞÇåÀí...
+echo æ‰§è¡Œæ¸…ç†...
 rd c:\tiny11 /s /q 
 rd c:\scratchdir /s /q 
 exit
